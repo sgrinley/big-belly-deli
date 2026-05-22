@@ -1,9 +1,11 @@
 package com.pluralsight.model;
 
+import com.pluralsight.Orderable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sandwich {
+public class Sandwich implements Orderable {
 
     //    Add Data Fields
     private String size; // 4", 8", 12"
@@ -90,5 +92,19 @@ public class Sandwich {
             }
         }
         return price;  //    NOTE: regular toppings & sauces are already included ($0.00)
+    }
+
+    @Override
+    public String getDetails() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(size).append(" ").append(breadType).append(" Sandwich");
+        if (isToasted) sb.append(" (Toasted)");
+        sb.append("\n  Meats: ").append(meatToppings.isEmpty() ? "None" : meatToppings);
+        if (extraMeat) sb.append(" [Extra Meat]");
+        sb.append("\n  Cheeses: ").append(cheeseToppings.isEmpty() ? "None" : cheeseToppings);
+        if (extraCheese) sb.append(" [Extra Cheese]");
+        sb.append("\n  Regular Toppings: ").append(regularToppings.isEmpty() ? "None" : regularToppings);
+        sb.append("\n  Sauces: ").append(sauces.isEmpty() ? "None" : sauces);
+        return sb.toString();
     }
 }

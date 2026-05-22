@@ -1,4 +1,6 @@
 package com.pluralsight;
 
-public class Orderable {
+public interface Orderable {
+    double getPrice();
+    String getDetails();
 }
