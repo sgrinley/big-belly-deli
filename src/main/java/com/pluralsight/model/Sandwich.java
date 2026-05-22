@@ -52,6 +52,14 @@ public class Sandwich {
             case "4\"": price += 5.50; break;
             case "8\"": price += 7.00; break;
             case "12\"": price += 8.50; break;
+        }
+
+        //      Premium meat price
+        if (!meatToppings.isEmpty()) {
+            switch (size) {
+                case "4\"": price += 1.00; break;
+                case "8\"": price += 2.00; break;
+                case "12\"": price += 3.00; break;
 
         }
     }
