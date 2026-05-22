@@ -1,5 +1,6 @@
 package com.pluralsight.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sandwich {
@@ -25,11 +26,10 @@ public class Sandwich {
         this.size = size;
         this.breadType = breadType;
         this.isToasted = isToasted;
-        this.meatToppings = meatToppings;
-        this.cheeseToppings = cheeseToppings;
-        this.regularToppings = regularToppings;
-        this.premiumToppings = premiumToppings;
-        this.sauces = sauces;
+        this.meatToppings = new ArrayList<>();
+        this.cheeseToppings = new ArrayList<>();
+        this.regularToppings = new ArrayList<>();
+        this.sauces = new ArrayList<>();
     }
 }
 
