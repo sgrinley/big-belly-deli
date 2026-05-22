@@ -65,10 +65,19 @@ public class Sandwich {
             //      Extra meat charges
             if (extraMeat) {
                 switch (size) {
-                    case "4\"": price += .50; break;
+                    case "4\"": price += 0.50; break;
                     case "8\"": price += 1.00; break;
                     case "12\"": price += 1.50; break;
                 }
+            }
+        }
+
+        //        Premium cheese prices
+        if (!cheeseToppings.isEmpty()) {
+            switch (size) {
+                case "4\"":  price += 0.75; break;
+                case "8\"":  price += 1.50; break;
+                case "12\"": price += 2.25; break;
             }
         }
     }
