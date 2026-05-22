@@ -31,5 +31,17 @@ public class Sandwich {
         this.regularToppings = new ArrayList<>();
         this.sauces = new ArrayList<>();
     }
+    //  Generate Getters & Setters
+    public void addMeat(String meat) {meatToppings.add(meat);}
+    public void addCheese(String cheese) {cheeseToppings.add(cheese);}
+    public void addRegularToppings(String toppings) {regularToppings.add(toppings);}
+    public void addPremiumToppings(String toppings) {premiumToppings.add(toppings);}
+    public void addSauce(String sauce) {sauces.add(sauce);}
+
+    public void setExtraSauce(boolean extraSauce) {this.extraSauce = extraSauce;}
+    public void setExtraCheese(boolean extraCheese) {this.extraCheese = extraCheese;}
+    public void setExtraMeat(boolean extraMeat) {this.extraMeat = extraMeat;}
+
+
 }
 
