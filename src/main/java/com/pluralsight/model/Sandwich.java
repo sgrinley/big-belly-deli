@@ -47,9 +47,12 @@ public class Sandwich {
     public double getPrice() {
         double price = 0.0;
 
+        //     Bread size & price
+        switch (size){
+            case "4\"": price += 5.50; break;
+            case "8\"": price += 7.00; break;
+            case "12\"": price += 8.50; break;
+
+        }
     }
-
-
-
 }
-
