@@ -47,20 +47,29 @@ public class Sandwich {
     public double getPrice() {
         double price = 0.0;
 
-        //     Bread size & price
+        //     Bread sizes & prices
         switch (size){
             case "4\"": price += 5.50; break;
             case "8\"": price += 7.00; break;
             case "12\"": price += 8.50; break;
         }
 
-        //      Premium meat price
+        //      Premium meat prices
         if (!meatToppings.isEmpty()) {
             switch (size) {
                 case "4\"": price += 1.00; break;
                 case "8\"": price += 2.00; break;
                 case "12\"": price += 3.00; break;
+            }
 
+            //      Extra meat charges
+            if (extraMeat) {
+                switch (size) {
+                    case "4\"": price += .50; break;
+                    case "8\"": price += 1.00; break;
+                    case "12\"": price += 1.50; break;
+                }
+            }
         }
     }
 }
