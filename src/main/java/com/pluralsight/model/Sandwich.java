@@ -6,4 +6,11 @@ public class Sandwich {
     private String size; // 4", 8", 12"
     private String breadType; // White, Wheat, Rye, Wrap, Gluten Free (GF)
     private boolean isToasted;
+
+    //    Generate Constructor
+    public Sandwich(String size, String breadType, boolean isToasted) {
+        this.size = size;
+        this.breadType = breadType;
+        this.isToasted = isToasted;
+    }
 }
