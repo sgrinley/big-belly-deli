@@ -79,6 +79,16 @@ public class Sandwich {
                 case "8\"":  price += 1.50; break;
                 case "12\"": price += 2.25; break;
             }
+
+            //      Extra cheese charges
+            if (extraCheese) {
+                switch (size) {
+                    case "4\"":  price += 0.30; break;
+                    case "8\"":  price += 0.60; break;
+                    case "12\"": price += 0.90; break;
+                }
+            }
         }
+        return price;  //    NOTE: regular toppings & sauces are already included ($0.00)
     }
 }
