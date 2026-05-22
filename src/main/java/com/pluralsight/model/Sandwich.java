@@ -20,11 +20,16 @@ public class Sandwich {
     private boolean extraCheese;
     private boolean extraSauce;
 
-
     //    Generate Constructor
-    public Sandwich(String size, String breadType, boolean isToasted) {
+    public Sandwich(String size, String breadType, boolean isToasted, List<String> meatToppings, List<String> cheeseToppings, List<String> regularToppings, List<String> premiumToppings, List<String> sauces) {
         this.size = size;
         this.breadType = breadType;
         this.isToasted = isToasted;
+        this.meatToppings = meatToppings;
+        this.cheeseToppings = cheeseToppings;
+        this.regularToppings = regularToppings;
+        this.premiumToppings = premiumToppings;
+        this.sauces = sauces;
     }
 }
+
