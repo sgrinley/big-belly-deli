@@ -9,7 +9,7 @@ public class Chips implements Orderable {
 
     @Override
     public double getPrice() {
-        return 1.50; // Standard price for chips
+        return 1.55; // Standard price for chips
     }
 
     @Override
