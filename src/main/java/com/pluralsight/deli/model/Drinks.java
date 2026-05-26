@@ -1,6 +1,4 @@
-package com.pluralsight.model;
-
-import com.pluralsight.Orderable;
+package com.pluralsight.deli.model;
 
 public class Drinks implements Orderable {
     private String size;

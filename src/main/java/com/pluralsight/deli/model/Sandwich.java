@@ -1,6 +1,4 @@
-package com.pluralsight.model;
-
-import com.pluralsight.Orderable;
+package com.pluralsight.deli.model;
 
 import java.util.ArrayList;
 import java.util.List;
