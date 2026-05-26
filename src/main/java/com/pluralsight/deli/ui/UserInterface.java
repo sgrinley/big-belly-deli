@@ -79,7 +79,7 @@ public class UserInterface {
         String cheese = scanner.nextLine();
         if (!cheese.isBlank()) {
             sandwich.addTopping(new Toppings(cheese, "CHEESE"));
-            System.out.print("Add extra cheese? (y/n): "); // Bug fixed: now looks uniformly for "y"
+            System.out.print("Add extra cheese? (y/n): ");
             if (scanner.nextLine().equalsIgnoreCase("y")) sandwich.setExtraCheese(true);
         }
 
