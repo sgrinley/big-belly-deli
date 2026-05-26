@@ -4,92 +4,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sandwich implements Orderable {
+    private final String size;
+    private final String breadType;
+    private final boolean isToasted;
 
-    //    Add Data Fields
-    private String size; // 4", 8", 12"
-    private String breadType; // White, Wheat, Rye, Wrap, Gluten Free (GF)
-    private boolean isToasted;
-
-    //    Lists of Toppings
-    private List<String> meatToppings;
-    private List<String> cheeseToppings;
-    private List<String> regularToppings;
-    private List<String> premiumToppings;
-    private List<String> sauces;
+    private final List<Toppings> toppings;
 
     private boolean extraMeat;
     private boolean extraCheese;
-    private boolean extraSauce;
 
-    //    Generate Constructor
-    public Sandwich(String size, String breadType, boolean isToasted, List<String> meatToppings, List<String> cheeseToppings, List<String> regularToppings, List<String> premiumToppings, List<String> sauces) {
+    // Generate Constructor (Assigns parameters to fields and initializes list)
+    public Sandwich(String size, String breadType, boolean isToasted) {
         this.size = size;
         this.breadType = breadType;
         this.isToasted = isToasted;
-        this.meatToppings = new ArrayList<>();
-        this.cheeseToppings = new ArrayList<>();
-        this.regularToppings = new ArrayList<>();
-        this.sauces = new ArrayList<>();
+        this.toppings = new ArrayList<>();
     }
-    //  Generate Getters & Setters
-    public void addMeat(String meat) {meatToppings.add(meat);}
-    public void addCheese(String cheese) {cheeseToppings.add(cheese);}
-    public void addRegularToppings(String toppings) {regularToppings.add(toppings);}
-    public void addPremiumToppings(String toppings) {premiumToppings.add(toppings);}
-    public void addSauce(String sauce) {sauces.add(sauce);}
 
-    public void setExtraSauce(boolean extraSauce) {this.extraSauce = extraSauce;}
-    public void setExtraCheese(boolean extraCheese) {this.extraCheese = extraCheese;}
-    public void setExtraMeat(boolean extraMeat) {this.extraMeat = extraMeat;}
+    public void addTopping(Toppings toppings) {
+        this.toppings.add(toppings);
+    }
 
-    //    Add Switch Case
+    public void setExtraMeat(boolean extraMeat) { this.extraMeat = extraMeat; }
+    public void setExtraCheese(boolean extraCheese) { this.extraCheese = extraCheese; }
+
     @Override
     public double getPrice() {
         double price = 0.0;
 
-        //     Bread sizes & prices
-        switch (size){
-            case "4\"": price += 5.50; break;
-            case "8\"": price += 7.00; break;
+        // 1. Base Bread Calculations
+        switch (size) {
+            case "4\"":  price += 5.50; break;
+            case "8\"":  price += 7.00; break;
             case "12\"": price += 8.50; break;
         }
 
-        //      Premium meat prices
-        if (!meatToppings.isEmpty()) {
-            switch (size) {
-                case "4\"": price += 1.00; break;
-                case "8\"": price += 2.00; break;
-                case "12\"": price += 3.00; break;
-            }
+        // 2. Delegate price math loop to the topping objects
+        boolean countedFirstMeat = false;
+        boolean countedFirstCheese = false;
 
-            //      Extra meat charges
-            if (extraMeat) {
-                switch (size) {
-                    case "4\"": price += 0.50; break;
-                    case "8\"": price += 1.00; break;
-                    case "12\"": price += 1.50; break;
-                }
+        for (Toppings t : toppings) {
+            if (t.getType().equals("MEAT") && !countedFirstMeat) {
+                price += t.getBasePrice(size);
+                countedFirstMeat = true;
+            } else if (t.getType().equals("CHEESE") && !countedFirstCheese) {
+                price += t.getBasePrice(size);
+                countedFirstCheese = true;
             }
         }
 
-        //        Premium cheese prices
-        if (!cheeseToppings.isEmpty()) {
-            switch (size) {
-                case "4\"":  price += 0.75; break;
-                case "8\"":  price += 1.50; break;
-                case "12\"": price += 2.25; break;
-            }
+        // 3. Apply extra item upgrades safely
+        if (extraMeat)  price += new Toppings("", "MEAT").getExtraPrice(size);
+        if (extraCheese) price += new Toppings("", "CHEESE").getExtraPrice(size);
 
-            //      Extra cheese charges
-            if (extraCheese) {
-                switch (size) {
-                    case "4\"":  price += 0.30; break;
-                    case "8\"":  price += 0.60; break;
-                    case "12\"": price += 0.90; break;
-                }
-            }
-        }
-        return price;  //    NOTE: regular toppings & sauces are already included ($0.00)
+        return price;
     }
 
     @Override
@@ -97,12 +65,29 @@ public class Sandwich implements Orderable {
         StringBuilder sb = new StringBuilder();
         sb.append(size).append(" ").append(breadType).append(" Sandwich");
         if (isToasted) sb.append(" (Toasted)");
-        sb.append("\n  Meats: ").append(meatToppings.isEmpty() ? "None" : meatToppings);
+
+        // Organize outputs on demand
+        List<String> meatNames = new ArrayList<>();
+        List<String> cheeseNames = new ArrayList<>();
+        List<String> regularNames = new ArrayList<>();
+        List<String> sauceNames = new ArrayList<>();
+
+        for (Toppings t : toppings) {
+            switch (t.getType()) {
+                case "MEAT":    meatNames.add(t.getName()); break;
+                case "CHEESE":  cheeseNames.add(t.getName()); break;
+                case "REGULAR": regularNames.add(t.getName()); break;
+                case "SAUCE":   sauceNames.add(t.getName()); break;
+            }
+        }
+
+        sb.append("\n    Meats: ").append(meatNames.isEmpty() ? "None" : String.join(", ", meatNames));
         if (extraMeat) sb.append(" [Extra Meat]");
-        sb.append("\n  Cheeses: ").append(cheeseToppings.isEmpty() ? "None" : cheeseToppings);
+        sb.append("\n    Cheeses: ").append(cheeseNames.isEmpty() ? "None" : String.join(", ", cheeseNames));
         if (extraCheese) sb.append(" [Extra Cheese]");
-        sb.append("\n  Regular Toppings: ").append(regularToppings.isEmpty() ? "None" : regularToppings);
-        sb.append("\n  Sauces: ").append(sauces.isEmpty() ? "None" : sauces);
+        sb.append("\n    Regular Toppings: ").append(regularNames.isEmpty() ? "None" : String.join(", ", regularNames));
+        sb.append("\n    Sauces: ").append(sauceNames.isEmpty() ? "None" : String.join(", ", sauceNames));
+
         return sb.toString();
     }
 }
