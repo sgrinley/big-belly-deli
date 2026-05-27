@@ -44,10 +44,10 @@ public class Sandwich implements Orderable {
         boolean countedFirstCheese = false;
 
         for (Toppings t : toppings) {
-            if (t.getType().equals("MEAT") && !countedFirstMeat) {
+            if (t.type().equals("MEAT") && !countedFirstMeat) {
                 price += t.getBasePrice(size);
                 countedFirstMeat = true;
-            } else if (t.getType().equals("CHEESE") && !countedFirstCheese) {
+            } else if (t.type().equals("CHEESE") && !countedFirstCheese) {
                 price += t.getBasePrice(size);
                 countedFirstCheese = true;
             }
@@ -73,11 +73,11 @@ public class Sandwich implements Orderable {
         List<String> sauceNames = new ArrayList<>();
 
         for (Toppings t : toppings) {
-            switch (t.getType()) {
-                case "MEAT":    meatNames.add(t.getName()); break;
-                case "CHEESE":  cheeseNames.add(t.getName()); break;
-                case "REGULAR": regularNames.add(t.getName()); break;
-                case "SAUCE":   sauceNames.add(t.getName()); break;
+            switch (t.type()) {
+                case "MEAT":    meatNames.add(t.name()); break;
+                case "CHEESE":  cheeseNames.add(t.name()); break;
+                case "REGULAR": regularNames.add(t.name()); break;
+                case "SAUCE":   sauceNames.add(t.name()); break;
             }
         }
 

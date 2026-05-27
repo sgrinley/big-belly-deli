@@ -1,16 +1,13 @@
 package com.pluralsight.deli.model;
 
-public class Toppings {
-    private final String name;
-    private final String type; // "MEAT", "CHEESE", "REGULAR", "SAUCE"
-
+/**
+ * @param type "MEAT", "CHEESE", "REGULAR", "SAUCE"
+ */
+public record Toppings(String name, String type) {
     public Toppings(String name, String type) {
         this.name = name;
         this.type = type.toUpperCase();
     }
-
-    public String getName() { return name; }
-    public String getType() { return type; }
 
     /**
      * Calculates the premium topping base price depending on the sandwich size.

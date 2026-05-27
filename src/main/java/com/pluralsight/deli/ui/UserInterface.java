@@ -109,7 +109,7 @@ public class UserInterface {
         System.out.print("Select drink flavor (Berry Bliss, Mango Jango, Tamarind Refresher, Tropical Rhythm: ");
         String flavor = scanner.nextLine();
 
-        cart.add(new Drinks(size, flavor));
+        cart.add(new Drink(size, flavor));
         System.out.println("Drink successfully added to your order!");
     }
 

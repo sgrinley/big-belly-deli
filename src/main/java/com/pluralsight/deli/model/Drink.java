@@ -1,8 +1,8 @@
 package com.pluralsight.deli.model;
 
 public class Drink implements Orderable {
-    private String size;
-    private String flavor;
+    private final String size;
+    private final String flavor;
 
     public Drink(String size, String flavor) {
         this.size = size;
