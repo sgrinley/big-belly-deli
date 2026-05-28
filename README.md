@@ -1,6 +1,6 @@
 # Big Belly Deli - Console Ordering Application
 
-Welcome to the **Big Belly Deli** application! This is a robust, console-based point-of-sale (POS) system built in Java. The application allows customers to build custom sandwiches with detailed topping options, choose drinks and sides, dynamically review their cart with real-time pricing math, and automatically generate formatted text receipts.
+Welcome to the **Big Belly Deli** application! This is a robust, console-based point-of-sale (POS) system built in Java. The application allows customers to order and build custom sandwiches with detailed topping options, choose drinks and sides, dynamically review their cart with real-time pricing math logic, and automatically generate formatted text receipts.
 
 ---
 
