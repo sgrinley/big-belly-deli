@@ -1,0 +1,21 @@
+========================================
+          Big Belly Deli         
+========================================
+
+4" White Sandwich (Toasted)
+    Meats: Steak
+    Cheeses: American
+    Regular Toppings: Lettuce, Peppers, Onion, Tomatoes, Cucumbers, Guacamole
+    Sauces: Mayo, Mustard, Ketchup, Ranch
+    Sides: Sauce Cup
+    Price: $5.50
+
+Medium Mango Jango Drink
+    Price: $2.50
+
+Regular Chips
+    Price: $1.55
+
+----------------------------------------
+GRAND TOTAL AMOUNT: $9.55
+========================================
