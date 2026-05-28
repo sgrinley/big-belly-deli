@@ -67,6 +67,7 @@ public class UserInterface {
 
         Sandwich sandwich = new Sandwich(size, bread, toasted);
 
+        //  MEAT SELECTION
         System.out.print("Enter meat (Steak, Ham, Salami, Roast Beef, Chicken, Bacon - leave blank to skip): ");
         String meat = scanner.nextLine();
         if (!meat.isBlank()) {
@@ -74,7 +75,7 @@ public class UserInterface {
             System.out.print("Add extra meat? (y/n): ");
             if (scanner.nextLine().equalsIgnoreCase("y")) sandwich.setExtraMeat(true);
         }
-
+        //  CHEESE SELECTION
         System.out.print("Enter cheese (American, Provolone, Cheddar, Swiss - leave blank to skip): ");
         String cheese = scanner.nextLine();
         if (!cheese.isBlank()) {
@@ -82,8 +83,10 @@ public class UserInterface {
             System.out.print("Add extra cheese? (y/n): ");
             if (scanner.nextLine().equalsIgnoreCase("y")) sandwich.setExtraCheese(true);
         }
-
-        System.out.print("Enter regular toppings (e.g. Lettuce, Tomatoes, Onions, Pickles, Peppers - comma separated or leave blank): ");
+        //  REGULAR TOPPINGS SELECTION
+        System.out.print("\n=== Available Regular Toppings (FREE) ===");
+        System.out.print("- Lettuce, Peppers, Onions, Tomatoes, Jalapeños, Cucumbers, Pickles, Guacamole, Mushrooms: ");
+        System.out.print("Enter regular toppings (comma separated or leave blank to skip): ");
         String regularInput = scanner.nextLine();
         if (!regularInput.isBlank()) {
             for (String top : regularInput.split(",")) {
@@ -91,7 +94,10 @@ public class UserInterface {
             }
         }
 
-        System.out.print("Enter sauces (e.g. Mayo, Mustard, Ketchup, Ranch  - comma separated or leave blank): ");
+        //  SAUCES SELECTION
+        System.out.print("\n=== Available Sauces (FREE) ===");
+        System.out.print("- Mayo, Mustard, Ketchup, Ranch, Thousand Islands, Vinaigrette");
+        System.out.print("Enter sauces (comma separated or leave blank to skip): ");
         String sauceInput = scanner.nextLine();
         if (!sauceInput.isBlank()) {
             for (String s : sauceInput.split(",")) {
@@ -99,10 +105,44 @@ public class UserInterface {
             }
         }
 
+        //  SIDES SELECTION
+        System.out.println("\n=== Available Sides (FREE) ===");
+        System.out.println("- Au Jus, Sauce Cup");
+        System.out.print("Enter sides (comma separated or leave blank to skip): ");
+        String sideInput = scanner.nextLine();
+        if (!sideInput.isBlank()) {
+            for (String side : sideInput.split(",")) {
+                sandwich.addTopping(new Toppings(side.trim(), "SIDE"));
+            }
+        }
+
+        //  TOPPING REMOVAL
+        handleToppingRemoval(sandwich);
         cart.add(sandwich);
-        System.out.println("Sandwich successfully added to your order!");
+        System.out.println("\nSandwich successfully added to your order!");
     }
 
+    private void handleToppingRemoval(Sandwich sandwich) {
+        System.out.println("\n--- Edit Sandwich Toppings ---");
+        System.out.print("Would you like to remove any toppings, sauces, or sides? (y/n): ");
+        if (!scanner.nextLine().equalsIgnoreCase("y")) {
+            return; // Skip editing if they don't explicitly want to change anything
+        }
+
+        while (true) {
+            System.out.print("Enter the exact name of an item to remove (or leave blank to finish editing): ");
+            String toRemove = scanner.nextLine().trim();
+
+            if (toRemove.isBlank()) {
+                break; // Hit "ENTER" to exit loop
+            }
+
+            sandwich.removeTopping(toRemove);
+            System.out.println("'" + toRemove + "' has been processed for removal.");
+        }
+    }
+
+    //    DRINK SELECTION
     private void menuAddDrink() {
         System.out.print("Select drink size (Small, Medium, Large): ");
         String size = scanner.nextLine();
@@ -113,6 +153,7 @@ public class UserInterface {
         System.out.println("Drink successfully added to your order!");
     }
 
+    //    CHIPS SELECTION
     private void menuAddChips() {
         System.out.print("Select chips type (Regular, BBQ, Sour Cream): ");
         String type = scanner.nextLine();
@@ -121,6 +162,7 @@ public class UserInterface {
         System.out.println("Chips successfully added to your order!");
     }
 
+    //    CHECKOUT PROMPT
     private void menuCheckout() {
         System.out.println("\n=== Complete Checkout ===");
         double total = 0.0;
